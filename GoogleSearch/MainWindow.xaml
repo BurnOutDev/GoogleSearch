@@ -1,0 +1,116 @@
+﻿<Window x:Class="GoogleSearch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBox Name="tbxSearch"
+                 HorizontalAlignment="Stretch"
+                 Height="23" 
+                 Margin="10,10,90,0"
+                 TextWrapping="Wrap" 
+                 Text=""
+                 VerticalAlignment="Top"
+                 Width="Auto"
+                 TextChanged="tbxSearch_TextChanged"/>
+
+        <TabControl Name="tabControl"
+                    HorizontalAlignment="Stretch"
+                    Height="Auto" Margin="10,38,0,0"
+                    VerticalAlignment="Stretch"
+                    Width="Auto">
+
+            <TabItem Header="Web">
+
+                <Grid Background="#FFE5E5E5">
+
+                    <ItemsControl Name="lstResultsWeb"
+                		HorizontalAlignment="Stretch"
+                		Height="Auto"
+                		Margin="0,0,0,21" 
+                		VerticalAlignment="Stretch" 
+                		Width="Auto">
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock><Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate"><InlineUIContainer>
+                								<TextBlock Text="{Binding TitleNoFormatting}" FontFamily="Segoe UI" FontSize="14"/>
+                							</InlineUIContainer></Hyperlink></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Images">
+                <Grid Background="#FFE5E5E5">
+                    <ItemsControl Name="lstResultsImage">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock>
+                                        <Hyperlink NavigateUri="{Binding Path=Url}" RequestNavigate="Hyperlink_RequestNavigate"><InlineUIContainer>
+                                               
+                                            <Image Height="{Binding Path=TbHeight}" Width="{Binding Path=TbWidth}" Source="{Binding Path=TbUrl}"></Image>
+                								<!--<TextBlock Text="{Binding TitleNoFormatting}" FontFamily="Segoe UI" FontSize="14"/>-->
+                							</InlineUIContainer></Hyperlink></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Videos">
+                <Grid Background="#FFE5E5E5">
+                    <ItemsControl Name="lstResultsVideo" 
+                                  HorizontalAlignment="Stretch"
+                		          Height="Auto"
+                                  Margin="0,0,0,21"  
+                                  VerticalAlignment="Stretch" 
+                                  Width="Auto">
+                        
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock>
+                                        <Hyperlink NavigateUri="{Binding Path=Url}" RequestNavigate="Hyperlink_RequestNavigate"><InlineUIContainer>
+                                               
+                                            <Image Height="{Binding Path=TbHeight}" Width="{Binding Path=TbWidth}" Source="{Binding Path=TbUrl}"></Image>
+                								<!--<TextBlock Text="{Binding TitleNoFormatting}" FontFamily="Segoe UI" FontSize="14"/>-->
+                							</InlineUIContainer></Hyperlink></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="btnSearch"
+                IsDefault="True"
+        	Content="Search" 
+        	HorizontalAlignment="Right"
+        	Margin="0,10,10,0"
+        	VerticalAlignment="Top"
+        	Width="75" 
+        	Height="23" 
+        	Click="btnSearch_Click"
+        	IsEnabled="False"/>
+    </Grid>
+</Window>
